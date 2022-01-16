@@ -45,7 +45,8 @@ Encore.setPublicPath('/assets')
 | entrypoints.
 |
 */
-Encore.addEntry('app', './resources/js/app.js')
+Encore.addEntry('app', './resources/js/app.ts')
+Encore.enableTypeScriptLoader()
 
 /*
 |--------------------------------------------------------------------------
@@ -181,11 +182,11 @@ Encore.configureDevServerOptions((options) => {
 | sure to install the required dependencies.
 |
 */
-// Encore.enableVueLoader(() => {}, {
-//   version: 3,
-//   runtimeCompilerBuild: false,
-//   useJsx: false
-// })
+Encore.enableVueLoader(() => {}, {
+  version: 3,
+  runtimeCompilerBuild: false,
+  useJsx: false,
+})
 
 /*
 |--------------------------------------------------------------------------

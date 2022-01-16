@@ -8,6 +8,11 @@
     "build"
   ],
   "compilerOptions": {
+    "target": "esnext",
+//    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+//    "moduleResolution": "node",
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
@@ -25,6 +30,11 @@
         "./database/*"
       ]
     },
+    "plugins": [
+      {
+        "name": "@vuedx/typescript-plugin-vue"
+      }
+    ],
     "types": [
       "@adonisjs/core",
       "@adonisjs/repl",
@@ -32,7 +42,11 @@
       "@adonisjs/view",
       "@adonisjs/shield",
       "@adonisjs/redis",
-      "@adonisjs/lucid"
+      "@adonisjs/lucid",
+      "@eidellev/inertia-adonisjs"
+    ],
+    "lib": [
+      "dom"
     ]
   }
 }

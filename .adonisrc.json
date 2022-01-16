@@ -15,7 +15,13 @@
   },
   "preloads": [
     "./start/routes",
-    "./start/kernel"
+    "./start/kernel",
+    {
+      "file": "./start/inertia",
+      "environment": [
+        "web"
+      ]
+    }
   ],
   "providers": [
     "./providers/AppProvider",
@@ -24,7 +30,9 @@
     "@adonisjs/view",
     "@adonisjs/shield",
     "@adonisjs/redis",
-    "@adonisjs/lucid"
+    "@adonisjs/lucid",
+    "@eidellev/inertia-adonisjs",
+    "@eidellev/adonis-stardust"
   ],
   "metaFiles": [
     {
