@@ -1,0 +1,49 @@
+version: '3'
+services:
+  pgsql:
+    image: 'postgres:latest'
+    ports:
+      - '${FORWARD_DB_PORT:-5432}:5432'
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - 'dc_couriers_pgsql:/var/lib/postgresql/data'
+      - ./docker/pgsql/entrypoint.d:/docker-entrypoint-initdb.d
+    networks:
+      - dc_couriers
+    healthcheck:
+      test:
+        [
+            'CMD',
+            'pg_isready',
+            '-q',
+            '-d',
+            '${DB_DATABASE}',
+            '-U',
+            '${DB_USERNAME}',
+        ]
+    container_name: 'dc_couriers_pgsql'
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '${FORWARD_REDIS_PORT:-6379}:6379'
+    volumes:
+      - 'dc_couriers_redis:/data'
+    networks:
+      - dc_couriers
+    healthcheck:
+      test: [ 'CMD', 'redis-cli', 'ping' ]
+      retries: 3
+      timeout: 5s
+    container_name: 'dc_couriers_redis'
+networks:
+  dc_couriers:
+    driver: bridge
+volumes:
+  dc_couriers_pgsql:
+    driver: local
+  dc_couriers_redis:
+    driver: local
