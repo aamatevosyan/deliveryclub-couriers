@@ -23,6 +23,4 @@ export default class AuthenticatedSessionsController {
     // Create session
     await auth.use('web').login(user, rememberMe)
   }
-
-  
 }
