@@ -32,11 +32,12 @@
     "youch-terminal": "^2.0.0"
   },
   "dependencies": {
+    "@adonisjs/auth": "^8.0.10",
     "@adonisjs/core": "^5.4.0",
     "@adonisjs/lucid": "^16.3.2",
     "@adonisjs/redis": "^7.1.0",
     "@adonisjs/repl": "^3.1.0",
-    "@adonisjs/session": "^6.1.0",
+    "@adonisjs/session": "^6.1.2",
     "@adonisjs/shield": "^7.0.0",
     "@adonisjs/view": "^6.1.0",
     "@eidellev/adonis-stardust": "^2.2.0",

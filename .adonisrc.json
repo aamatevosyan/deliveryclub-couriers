@@ -32,7 +32,8 @@
     "@adonisjs/redis",
     "@adonisjs/lucid",
     "@eidellev/inertia-adonisjs",
-    "@eidellev/adonis-stardust"
+    "@eidellev/adonis-stardust",
+    "@adonisjs/auth"
   ],
   "metaFiles": [
     {

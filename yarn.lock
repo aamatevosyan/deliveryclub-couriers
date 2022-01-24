@@ -52,6 +52,15 @@
     picomatch "^2.3.0"
     slash "^3.0.0"
 
+"@adonisjs/auth@^8.0.10":
+  version "8.0.10"
+  resolved "https://registry.yarnpkg.com/@adonisjs/auth/-/auth-8.0.10.tgz#7d89aac9a57a6ce79cfff58e1a45af5cda65cfef"
+  integrity sha512-jE2C0btUresr1pRV1P8NAehSJlebJ+TlrQp1p1ws52AQ5h4ayjzTniZBtq6pSgm5uv6TAEQ7Mw7ZfTOwaA8MBQ==
+  dependencies:
+    "@poppinss/hooks" "^3.0.5"
+    "@poppinss/utils" "^3.2.0"
+    luxon "^2.0.2"
+
 "@adonisjs/bodyparser@^8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@adonisjs/bodyparser/-/bodyparser-8.0.1.tgz#2ef7a60ddb7f68eee92269be8fc0fd1827bbfd9a"
@@ -249,7 +258,7 @@
     rev-hash "^3.0.0"
     source-map-support "^0.5.19"
 
-"@adonisjs/session@^6.1.0":
+"@adonisjs/session@^6.1.2":
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/@adonisjs/session/-/session-6.1.2.tgz#60396c08fbe02de3acd8ab84d2e573c147b68653"
   integrity sha512-xXmn93b32XruL/zJ+h9Dea/RGneMhenp369PA55VV9Fnxjxf3ElmqMnZYoJ5HYCxbey0NnNODZ9co74+PCVbtw==
@@ -5559,7 +5568,7 @@ lru_map@^0.3.3:
   resolved "https://registry.yarnpkg.com/lru_map/-/lru_map-0.3.3.tgz#b5c8351b9464cbd750335a79650a0ec0e56118dd"
   integrity sha1-tcg1G5Rky9dQM1p5ZQoOwOVhGN0=
 
-luxon@^2.0.1, luxon@^2.1.1, luxon@^2.3.0:
+luxon@^2.0.1, luxon@^2.0.2, luxon@^2.1.1, luxon@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-2.3.0.tgz#bf16a7e642513c2a20a6230a6a41b0ab446d0045"
   integrity sha512-gv6jZCV+gGIrVKhO90yrsn8qXPKD8HYZJtrUDSfEbow8Tkw84T9OnCyJhWvnJIaIF/tBuiAjZuQHUt1LddX2mg==
