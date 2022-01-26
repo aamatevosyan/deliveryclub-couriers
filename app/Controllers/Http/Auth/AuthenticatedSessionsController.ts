@@ -2,8 +2,13 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import User from 'App/Models/User'
 import Hash from '@ioc:Adonis/Core/Hash'
+import Route from '@ioc:Adonis/Core/Route'
 
 export default class AuthenticatedSessionsController {
+  public async show({ inertia }: HttpContextContract) {
+    return inertia.render('Auth/Login')
+  }
+
   public async store({ auth, request, response }: HttpContextContract) {
     const email = request.input('email')
     const password = request.input('password')
@@ -22,5 +27,11 @@ export default class AuthenticatedSessionsController {
 
     // Create session
     await auth.use('web').login(user, rememberMe)
+  }
+
+  public async destroy({ auth, response }: HttpContextContract) {
+    await auth.use('web').logout()
+
+    response.redirect(Route.makeUrl('auth.login.show'))
   }
 }
