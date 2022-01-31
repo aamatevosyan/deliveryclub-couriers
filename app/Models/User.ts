@@ -10,6 +10,9 @@ export default class User extends BaseModel {
   public id: number
 
   @column()
+  public uuid: string
+
+  @column()
   public email: string
 
   @column()
@@ -17,6 +20,9 @@ export default class User extends BaseModel {
 
   @column()
   public status: number
+
+  @column()
+  public registrationStep: number
 
   @column({ serializeAs: null })
   public password: string

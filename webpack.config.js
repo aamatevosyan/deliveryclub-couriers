@@ -1,6 +1,8 @@
 const { join } = require('path')
 const Encore = require('@symfony/webpack-encore')
 
+require('dotenv').config()
+
 /*
 |--------------------------------------------------------------------------
 | Encore runtime environment
@@ -137,6 +139,11 @@ Encore.configureDevServerOptions((options) => {
   } else if (!Array.isArray(options.static)) {
     options.static = [options.static]
   }
+
+  options.port = process.env.ENCORE_PORT || 8080
+  options.host = process.env.HOST || '0.0.0.0'
+
+  options.allowedHosts = process.env.ALLOWED_HOSTS.split(',') || 'all'
 
   /**
    * Enable live reload and add views directory

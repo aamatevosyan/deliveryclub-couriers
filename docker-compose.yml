@@ -1,5 +1,29 @@
 version: '3'
 services:
+  app:
+    build:
+      context: ./docker/app/17.0
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: '${WWWGROUP}'
+    image: newapple4g/dcc
+    ports:
+      - '${APP_PORT:-80}:80'
+      - '${ENCORE_PORT:-8080}:8080'
+    environment:
+      WWWUSER: '${WWWUSER}'
+      CHOKIDAR_USEPOLLING: '1'
+      NODE_ENV: 'development'
+    restart: unless-stopped
+    volumes:
+      - '.:/var/www/html'
+    networks:
+      - dcc
+    depends_on:
+      - pgsql
+      - redis
+    container_name: 'dcc_app'
+    hostname: '${HOSTNAME:-dcc}'
   pgsql:
     image: 'postgres:latest'
     ports:
@@ -10,10 +34,10 @@ services:
       POSTGRES_USER: '${DB_USERNAME}'
       POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
     volumes:
-      - 'dc_couriers_pgsql:/var/lib/postgresql/data'
+      - 'dcc_pgsql:/var/lib/postgresql/data'
       - ./docker/pgsql/entrypoint.d:/docker-entrypoint-initdb.d
     networks:
-      - dc_couriers
+      - dcc
     healthcheck:
       test:
         [
@@ -25,25 +49,25 @@ services:
             '-U',
             '${DB_USERNAME}',
         ]
-    container_name: 'dc_couriers_pgsql'
+    container_name: 'dcc_pgsql'
   redis:
     image: 'redis:alpine'
     ports:
       - '${FORWARD_REDIS_PORT:-6379}:6379'
     volumes:
-      - 'dc_couriers_redis:/data'
+      - 'dcc_redis:/data'
     networks:
-      - dc_couriers
+      - dcc
     healthcheck:
       test: [ 'CMD', 'redis-cli', 'ping' ]
       retries: 3
       timeout: 5s
-    container_name: 'dc_couriers_redis'
+    container_name: 'dcc_redis'
 networks:
-  dc_couriers:
+  dcc:
     driver: bridge
 volumes:
-  dc_couriers_pgsql:
+  dcc_pgsql:
     driver: local
-  dc_couriers_redis:
+  dcc_redis:
     driver: local

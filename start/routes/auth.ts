@@ -8,39 +8,39 @@ Route.group(() => {
   Route.delete('/logout', 'AuthenticatedSessionsController.destroy').as('logout')
 
   Route.group(() => {
-    Route.get('/register', 'AuthCodeController.create').as('register.create')
+    Route.get('/', 'AuthCodeController.create').as('register.create')
 
-    Route.post('/register', 'AuthCodeController.store').as('register.store')
+    Route.post('/', 'AuthCodeController.store').as('register.store')
 
     Route.post('/resend-code', 'AuthCodeController.resend').as('register.resend-code')
 
-    Route.get('/validate/{uuid}', 'AuthCodeController.show')
+    Route.get('/validate/:uuid', 'AuthCodeController.show')
       .where('uuid', Route.matchers.uuid())
-      .as('register.validate.show')
+      .as('validate.show')
 
-    Route.delete('/validate/{uuid}', 'AuthCodeController.destroy')
+    Route.delete('/validate/:uuid', 'AuthCodeController.destroy')
       .where('uuid', Route.matchers.uuid())
-      .as('register.validate.destroy')
+      .as('validate.destroy')
 
-    Route.get('/{step}/{uuid}', 'RegisterController.show')
+    Route.get('/:step/:uuid', 'RegisterController.show')
       .where('uuid', Route.matchers.uuid())
       .where('step', {
         match: /^[1-2]+$/,
         cast: (id) => Number(id),
       })
-      .as('register.step.show')
+      .as('step.show')
 
-    Route.post('/{step}/{uuid}', 'RegisterController.store')
+    Route.post('/:step/:uuid', 'RegisterController.store')
       .where('uuid', Route.matchers.uuid())
       .where('step', {
         match: /^[1-2]+$/,
         cast: (id) => Number(id),
       })
-      .as('register.step.store')
+      .as('step.store')
   })
-    .as('register.')
+    .as('register')
     .prefix('register')
 })
-  .as('auth.')
+  .as('auth')
   .prefix('auth')
   .namespace('App/Controllers/Http/Auth')

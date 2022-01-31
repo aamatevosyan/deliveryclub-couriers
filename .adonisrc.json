@@ -4,7 +4,8 @@
     "./commands",
     "@adonisjs/core/build/commands/index.js",
     "@adonisjs/repl/build/commands",
-    "@adonisjs/lucid/build/commands"
+    "@adonisjs/lucid/build/commands",
+    "@rocketseat/adonis-bull/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -33,7 +34,11 @@
     "@adonisjs/lucid",
     "@eidellev/inertia-adonisjs",
     "@eidellev/adonis-stardust",
-    "@adonisjs/auth"
+    "@adonisjs/auth",
+    "@adonisjs/validator",
+    "adonis5-cache",
+    "@rocketseat/adonis-bull",
+    "adonis5-memcached-client"
   ],
   "metaFiles": [
     {
