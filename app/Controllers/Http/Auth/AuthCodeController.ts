@@ -34,13 +34,17 @@ export default class AuthCodeController {
 
     const uuid = uuidv4()
 
-    await Cache.put(`auth.sendcode.${uuid}`, {
-      email: email,
-      ttl: DateTime.now()
-        .plus(Duration.fromObject({ seconds: Config.get('dcc.authEmailTimeout') }))
-        .toISO(),
-      code: null,
-    })
+    await Cache.put(
+      `auth.sendcode.${uuid}`,
+      {
+        email: email,
+        ttl: DateTime.now()
+          .plus(Duration.fromObject({ seconds: Config.get('dcc.authEmailTimeout') }))
+          .toISO(),
+        code: null,
+      },
+      1000 * Config.get('dcc.authEmailTimeout')
+    )
 
     await Bull.add(new SendCodeByEmail().key, { email, uuid })
 

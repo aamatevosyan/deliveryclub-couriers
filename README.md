@@ -25,6 +25,11 @@ Run web server using yarn.
 ./sail yarn dev
 ```
 
+3. (Optional: Background jobs) Use to listen for Bull jobs queu:
+```bash
+./sail ace bull:listen
+```
+
 ### Use
 
 1. Use **./sail** to run **docker-compose**, **docker**, **yarn**, **node**, **ace**. \

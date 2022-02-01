@@ -5,7 +5,8 @@
     "@adonisjs/core/build/commands/index.js",
     "@adonisjs/repl/build/commands",
     "@adonisjs/lucid/build/commands",
-    "@rocketseat/adonis-bull/build/commands"
+    "@rocketseat/adonis-bull/build/commands",
+    "@adonisjs/mail/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -38,7 +39,8 @@
     "@adonisjs/validator",
     "adonis5-cache",
     "@rocketseat/adonis-bull",
-    "adonis5-memcached-client"
+    "adonis5-memcached-client",
+    "@adonisjs/mail"
   ],
   "metaFiles": [
     {
