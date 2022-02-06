@@ -1,8 +1,8 @@
 import { JobContract } from '@ioc:Rocketseat/Bull'
 import Cache from '@ioc:Adonis/Addons/Adonis5-Cache'
-import Config from '@ioc:Adonis/Core/Config'
 import Mail from '@ioc:Adonis/Addons/Mail'
 import Logger from '@ioc:Adonis/Core/Logger'
+import DCCConfig from 'Config/dcc'
 
 
 /*
@@ -44,6 +44,6 @@ export default class SendCodeByEmail implements JobContract {
     data.code = code
     Logger.info(`Email Verify: ${uuid} - ${code}`)
 
-    await Cache.put(cacheKey, data.code, 1000 * Config.get('dcc.authEmailTimeout'))
+    await Cache.put(cacheKey, data.code, DCCConfig.auth.email.timeouts.code)
   }
 }

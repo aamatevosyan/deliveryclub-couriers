@@ -8,11 +8,11 @@ Route.group(() => {
   Route.delete('/logout', 'AuthenticatedSessionsController.destroy').as('logout')
 
   Route.group(() => {
-    Route.get('/', 'AuthCodeController.create').as('register.create')
+    Route.get('/', 'AuthCodeController.create').as('create')
 
-    Route.post('/', 'AuthCodeController.store').as('register.store')
+    Route.post('/', 'AuthCodeController.store').as('store')
 
-    Route.post('/resend-code', 'AuthCodeController.resend').as('register.resend-code')
+    Route.post('/resend-code', 'AuthCodeController.resend').as('resend-code')
 
     Route.get('/validate/:uuid', 'AuthCodeController.show')
       .where('uuid', Route.matchers.uuid())
@@ -21,6 +21,24 @@ Route.group(() => {
     Route.delete('/validate/:uuid', 'AuthCodeController.destroy')
       .where('uuid', Route.matchers.uuid())
       .as('validate.destroy')
+
+    Route.group(() => {
+      Route.get('/', 'AuthPhoneCodeController.create').as('create')
+
+      Route.post('/', 'AuthPhoneCodeController.store').as('store')
+
+      Route.post('/resend-code', 'AuthPhoneCodeController.resend').as('resend-code')
+
+      Route.get('/validate/:uuid', 'AuthPhoneCodeController.show')
+        .where('uuid', Route.matchers.uuid())
+        .as('validate.show')
+
+      Route.delete('/validate/:uuid', 'AuthPhoneCodeController.destroy')
+        .where('uuid', Route.matchers.uuid())
+        .as('validate.destroy')
+    })
+      .as('phone')
+      .prefix('phone')
 
     Route.get('/:step/:uuid', 'RegisterController.show')
       .where('uuid', Route.matchers.uuid())
