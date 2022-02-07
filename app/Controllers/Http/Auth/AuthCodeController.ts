@@ -7,7 +7,12 @@ import { DateTime, Duration } from 'luxon'
 import SendCodeByEmail from 'App/Jobs/SendCodeByEmail'
 import Bull from '@ioc:Rocketseat/Bull'
 import SendCodeByEmailValidator from 'App/Validators/SendCodeByEmailValidator'
+import ResendCodeByEmailValidator from 'App/Validators/ResendCodeByEmailValidator'
+import ConfirmEmailCodeValidator from 'App/Validators/ConfirmEmailCodeValidator'
 import DCCConfig from 'Config/dcc'
+import { ValidationException } from '@ioc:Adonis/Core/Validator'
+import { uuid4 } from '@sentry/utils'
+import Logger from "@ioc:Adonis/Core/Logger";
 
 export default class AuthCodeController {
   public async create({ inertia }: HttpContextContract) {
@@ -67,8 +72,31 @@ export default class AuthCodeController {
     return inertia.render('Auth/VerifyCode', { uuid, expires, email })
   }
 
+  public async destroy({ request, response }: HttpContextContract) {
+    const uuid = request.param('uuid')
+    const payload = await request.validate(ConfirmEmailCodeValidator)
+    const cacheKey = `auth.sendcode.${uuid}`
+    const cacheData = await Cache.get(cacheKey)
+
+    Logger.info(cacheData)
+
+    if (
+      !cacheData ||
+      payload.code != cacheData.code ||
+      !Math.max(cacheData.ttl - DateTime.now().toMillis())
+    ) {
+      throw new ValidationException(false, { code: 'Code expired or invalid' })
+    }
+
+    const user = await User.firstOrCreate({ email: cacheData.email }, { uuid: uuid4() })
+
+    await Cache.forget(cacheKey)
+
+    return response.redirect(Route.makeUrl('auth.register.step', { uuid: user.uuid, step: 1 }))
+  }
+
   public async resend({ request, response }: HttpContextContract) {
-    const payload = await request.validate(SendCodeByEmailValidator)
+    const payload = await request.validate(ResendCodeByEmailValidator)
     const email = payload.email
 
     const user = await User.query()
@@ -85,7 +113,7 @@ export default class AuthCodeController {
       )
     }
 
-    const uuid = request.param('uuid')
+    const uuid = payload.uuid
     const cacheKey = `auth.sendcode.${uuid}`
     const cacheData = await Cache.get(cacheKey)
 

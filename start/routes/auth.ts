@@ -1,4 +1,5 @@
 import Route from '@ioc:Adonis/Core/Route'
+import { uuid } from 'App/Misc/matchers'
 
 Route.group(() => {
   Route.get('/login', 'AuthenticatedSessionsController.show').as('login.show')
@@ -15,11 +16,11 @@ Route.group(() => {
     Route.post('/resend-code', 'AuthCodeController.resend').as('resend-code')
 
     Route.get('/validate/:uuid', 'AuthCodeController.show')
-      .where('uuid', Route.matchers.uuid())
+      .where('uuid', uuid())
       .as('validate.show')
 
     Route.delete('/validate/:uuid', 'AuthCodeController.destroy')
-      .where('uuid', Route.matchers.uuid())
+      .where('uuid', uuid())
       .as('validate.destroy')
 
     Route.group(() => {
@@ -30,18 +31,18 @@ Route.group(() => {
       Route.post('/resend-code', 'AuthPhoneCodeController.resend').as('resend-code')
 
       Route.get('/validate/:uuid', 'AuthPhoneCodeController.show')
-        .where('uuid', Route.matchers.uuid())
+        .where('uuid', uuid())
         .as('validate.show')
 
       Route.delete('/validate/:uuid', 'AuthPhoneCodeController.destroy')
-        .where('uuid', Route.matchers.uuid())
+        .where('uuid', uuid())
         .as('validate.destroy')
     })
       .as('phone')
       .prefix('phone')
 
     Route.get('/:step/:uuid', 'RegisterController.show')
-      .where('uuid', Route.matchers.uuid())
+      .where('uuid', uuid())
       .where('step', {
         match: /^[1-2]+$/,
         cast: (id) => Number(id),

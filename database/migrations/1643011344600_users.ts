@@ -7,6 +7,7 @@ export default class UsersSchema extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
+      table.uuid('uuid').unique()
       table.string('email', 255).notNullable()
       table.string('phone', 255).nullable()
       table.tinyint('status').defaultTo(User.STATUS_INACTIVE).notNullable()

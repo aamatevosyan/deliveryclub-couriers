@@ -44,6 +44,6 @@ export default class SendCodeByEmail implements JobContract {
     data.code = code
     Logger.info(`Email Verify: ${uuid} - ${code}`)
 
-    await Cache.put(cacheKey, data.code, DCCConfig.auth.email.timeouts.code)
+    await Cache.put(cacheKey, data, DCCConfig.auth.email.timeouts.code)
   }
 }
