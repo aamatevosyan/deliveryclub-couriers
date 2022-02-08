@@ -1,6 +1,3 @@
-const jobs = [
-  'App/Jobs/SendCodeByEmail',
-  'App/Jobs/SendCodeByPhone',
-]
+const jobs = ['App/Jobs/SendCodeByEmail', 'App/Jobs/SendCodeByPhone']
 
 export default jobs

@@ -1,7 +1,24 @@
 {
-  "extends": ["plugin:adonis/typescriptApp", "prettier"],
-  "plugins": ["prettier"],
+  "extends": [
+    "plugin:adonis/typescriptApp",
+    "prettier",
+    "plugin:vue/base",
+    "plugin:vue/vue3-recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "parser": "vue-eslint-parser",
   "rules": {
-    "prettier/prettier": ["error"]
+    "prettier/prettier": [
+      "error"
+    ]
+  },
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "project": "tsconfig.eslint.json",
+    "extraFileExtensions": [
+      ".vue"
+    ]
   }
 }

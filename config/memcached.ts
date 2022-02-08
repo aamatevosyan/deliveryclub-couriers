@@ -2,7 +2,7 @@ import { AdonisMemcachedClientConfig } from '@ioc:Adonis/Addons/Adonis5-Memcache
 import Env from '@ioc:Adonis/Core/Env'
 
 const config: AdonisMemcachedClientConfig = {
-	server: Env.get('MEMCACHED_SERVER_URL'),
+  server: Env.get('MEMCACHED_SERVER_URL'),
 }
 
 export default config

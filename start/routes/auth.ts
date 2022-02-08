@@ -24,13 +24,9 @@ Route.group(() => {
       .as('validate.destroy')
 
     Route.group(() => {
-      Route.get('/:uuid', 'AuthPhoneCodeController.create')
-        .where('uuid', uuid())
-        .as('create')
+      Route.get('/:uuid', 'AuthPhoneCodeController.create').where('uuid', uuid()).as('create')
 
-      Route.post('/:uuid', 'AuthPhoneCodeController.store')
-        .where('uuid', uuid())
-        .as('store')
+      Route.post('/:uuid', 'AuthPhoneCodeController.store').where('uuid', uuid()).as('store')
 
       Route.post('/resend-code/:uuid', 'AuthPhoneCodeController.resend')
         .where('uuid', uuid())
