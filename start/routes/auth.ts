@@ -24,11 +24,17 @@ Route.group(() => {
       .as('validate.destroy')
 
     Route.group(() => {
-      Route.get('/', 'AuthPhoneCodeController.create').as('create')
+      Route.get('/:uuid', 'AuthPhoneCodeController.create')
+        .where('uuid', uuid())
+        .as('create')
 
-      Route.post('/', 'AuthPhoneCodeController.store').as('store')
+      Route.post('/:uuid', 'AuthPhoneCodeController.store')
+        .where('uuid', uuid())
+        .as('store')
 
-      Route.post('/resend-code', 'AuthPhoneCodeController.resend').as('resend-code')
+      Route.post('/resend-code/:uuid', 'AuthPhoneCodeController.resend')
+        .where('uuid', uuid())
+        .as('resend-code')
 
       Route.get('/validate/:uuid', 'AuthPhoneCodeController.show')
         .where('uuid', uuid())
@@ -41,21 +47,13 @@ Route.group(() => {
       .as('phone')
       .prefix('phone')
 
-    Route.get('/:step/:uuid', 'RegisterController.show')
+    Route.get('/finalize/:uuid', 'RegisterController.show')
       .where('uuid', uuid())
-      .where('step', {
-        match: /^[1-2]+$/,
-        cast: (id) => Number(id),
-      })
-      .as('step.show')
+      .as('finalize.show')
 
-    Route.post('/:step/:uuid', 'RegisterController.store')
-      .where('uuid', Route.matchers.uuid())
-      .where('step', {
-        match: /^[1-2]+$/,
-        cast: (id) => Number(id),
-      })
-      .as('step.store')
+    Route.post('/finalize/:uuid', 'RegisterController.store')
+      .where('uuid', uuid())
+      .as('finalize.store')
   })
     .as('register')
     .prefix('register')

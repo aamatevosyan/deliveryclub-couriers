@@ -24,7 +24,11 @@ export default class ResendCodeByEmailValidator {
    *    ```
    */
   public schema = schema.create({
-    email: schema.string({}, [rules.required(), rules.email()]),
+    email: schema.string({}, [
+      rules.required(),
+      rules.email(),
+      rules.unique({ table: 'users', column: 'email' }),
+    ]),
     uuid: schema.string({}, [rules.required(), rules.uuid()]),
   })
 

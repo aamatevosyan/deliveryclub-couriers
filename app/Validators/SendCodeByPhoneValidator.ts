@@ -1,7 +1,7 @@
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class SendCodeByEmailValidator {
+export default class SendCodeByPhoneValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,10 +24,10 @@ export default class SendCodeByEmailValidator {
    *    ```
    */
   public schema = schema.create({
-    email: schema.string({}, [
+    phone: schema.string({}, [
       rules.required(),
-      rules.email(),
-      rules.unique({ table: 'users', column: 'email' }),
+      rules.phone(),
+      rules.unique({ table: 'users', column: 'phone' }),
     ]),
   })
 

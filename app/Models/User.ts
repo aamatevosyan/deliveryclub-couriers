@@ -21,9 +21,6 @@ export default class User extends BaseModel {
   @column()
   public status: number
 
-  @column()
-  public registrationStep: number
-
   @column({ serializeAs: null })
   public password: string
 

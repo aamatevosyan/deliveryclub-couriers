@@ -1,6 +1,5 @@
 import { JobContract } from '@ioc:Rocketseat/Bull'
 import Cache from '@ioc:Adonis/Addons/Adonis5-Cache'
-import Mail from '@ioc:Adonis/Addons/Mail'
 import Logger from '@ioc:Adonis/Core/Logger'
 import DCCConfig from 'Config/dcc'
 
@@ -21,27 +20,22 @@ function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export default class SendCodeByEmail implements JobContract {
-  public key = 'SendCodeByEmail'
+export default class SendCodeByPhone implements JobContract {
+  public key = 'SendCodeByPhone'
 
   // @ts-ignore
   public async handle(job) {
-    const { email, uuid } = job.data
+    const { phone, uuid } = job.data
 
     const code = randomIntFromInterval(10000, 99999)
-    const cacheKey = `auth.sendcode.email.${uuid}`
+    const cacheKey = `auth.sendcode.phone.${uuid}`
 
-    await Mail.send((message) => {
-      message
-        .from(DCCConfig.auth.email.from)
-        .to(email)
-        .subject(DCCConfig.auth.email.subject)
-        .htmlView('auth/email-confirm', { code })
-    })
+    //TODO: add Twilio sms send
+    Logger.info(phone)
 
     const data = await Cache.get(cacheKey)
     data.code = code
-    Logger.info(`Email Verify: ${uuid} - ${code}`)
+    Logger.info(`Phone Verify: ${uuid} - ${code}`)
 
     await Cache.put(cacheKey, data, DCCConfig.auth.email.timeouts.code)
   }

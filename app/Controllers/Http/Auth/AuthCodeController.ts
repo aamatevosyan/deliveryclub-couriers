@@ -12,7 +12,6 @@ import ConfirmEmailCodeValidator from 'App/Validators/ConfirmEmailCodeValidator'
 import DCCConfig from 'Config/dcc'
 import { ValidationException } from '@ioc:Adonis/Core/Validator'
 import { uuid4 } from '@sentry/utils'
-import Logger from "@ioc:Adonis/Core/Logger";
 
 export default class AuthCodeController {
   public async create({ inertia }: HttpContextContract) {
@@ -25,20 +24,19 @@ export default class AuthCodeController {
 
     const user = await User.query()
       .where('email', email)
-      .where('status', User.STATUS_ACTIVE)
+      .where('status', User.STATUS_INACTIVE)
       .first()
 
     if (user) {
       return response.redirect(
-        Route.makeUrl('auth.register.step.show', {
-          step: user.registrationStep,
-          uuid: user.uuid,
+        Route.makeUrl('auth.register.phone.create', {
+          user: user.uuid,
         })
       )
     }
 
     const uuid = uuidv4()
-    const cacheKey = `auth.sendcode.${uuid}`
+    const cacheKey = `auth.sendcode.email.${uuid}`
 
     await Cache.put(
       cacheKey,
@@ -59,7 +57,7 @@ export default class AuthCodeController {
 
   public async show({ request, response, inertia }: HttpContextContract) {
     const uuid = request.param('uuid')
-    const cacheKey = `auth.sendcode.${uuid}`
+    const cacheKey = `auth.sendcode.email.${uuid}`
     const cacheData = await Cache.get(cacheKey)
 
     if (!cacheData) {
@@ -75,10 +73,8 @@ export default class AuthCodeController {
   public async destroy({ request, response }: HttpContextContract) {
     const uuid = request.param('uuid')
     const payload = await request.validate(ConfirmEmailCodeValidator)
-    const cacheKey = `auth.sendcode.${uuid}`
+    const cacheKey = `auth.sendcode.email.${uuid}`
     const cacheData = await Cache.get(cacheKey)
-
-    Logger.info(cacheData)
 
     if (
       !cacheData ||
@@ -92,7 +88,7 @@ export default class AuthCodeController {
 
     await Cache.forget(cacheKey)
 
-    return response.redirect(Route.makeUrl('auth.register.step', { uuid: user.uuid, step: 1 }))
+    return response.redirect(Route.makeUrl('auth.register.phone.create', { uuid: user.uuid }))
   }
 
   public async resend({ request, response }: HttpContextContract) {
@@ -106,15 +102,14 @@ export default class AuthCodeController {
 
     if (user) {
       return response.redirect(
-        Route.makeUrl('auth.register.step.show', {
-          step: user.registrationStep,
-          uuid: user.uuid,
+        Route.makeUrl('auth.register.phone.create', {
+          user: user.uuid,
         })
       )
     }
 
     const uuid = payload.uuid
-    const cacheKey = `auth.sendcode.${uuid}`
+    const cacheKey = `auth.sendcode.email.${uuid}`
     const cacheData = await Cache.get(cacheKey)
 
     if (

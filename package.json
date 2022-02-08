@@ -26,7 +26,7 @@
     "pino-pretty": "^7.3.0",
     "prettier": "^2.5.1",
     "ts-loader": "^9.2.6",
-    "typescript": "^4.5.4",
+    "typescript": "^4.5.5",
     "vue": "^3.2.26",
     "vue-loader": "^17.0.0",
     "youch": "^3.0.0",
