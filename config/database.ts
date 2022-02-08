@@ -40,15 +40,15 @@ const databaseConfig: DatabaseConfig = {
         port: Env.get('DB_PORT'),
         user: Env.get('DB_USERNAME'),
         password: Env.get('DB_PASSWORD', 'secret'),
-        database: Env.get('DB_DATABASE'),
+        database: Env.get('DB_DATABASE')
       },
       migrations: {
-        naturalSort: true,
+        naturalSort: true
       },
       healthCheck: false,
-      debug: false,
-    },
-  },
+      debug: false
+    }
+  }
 }
 
 export default databaseConfig

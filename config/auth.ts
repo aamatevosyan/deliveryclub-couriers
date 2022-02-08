@@ -77,8 +77,8 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
-        model: () => import('App/Models/User'),
-      },
+        model: () => import('App/Models/User')
+      }
     },
     /*
     |--------------------------------------------------------------------------
@@ -113,7 +113,7 @@ const authConfig: AuthConfig = {
         type: 'api',
         driver: 'database',
         table: 'api_tokens',
-        foreignKey: 'user_id',
+        foreignKey: 'user_id'
       },
 
       provider: {
@@ -161,10 +161,10 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
-        model: () => import('App/Models/User'),
-      },
-    },
-  },
+        model: () => import('App/Models/User')
+      }
+    }
+  }
 }
 
 export default authConfig

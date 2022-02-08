@@ -77,8 +77,8 @@ const driveConfig: DriveConfig = {
       | you are not registering routes with this prefix.
       |
       */
-      basePath: '/uploads',
-    },
+      basePath: '/uploads'
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -142,7 +142,7 @@ const driveConfig: DriveConfig = {
       */
     //   usingUniformAcl: false
     // },
-  },
+  }
 }
 
 export default driveConfig

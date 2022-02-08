@@ -22,9 +22,9 @@ const bullConfig: BullConfig = {
     local: {
       host: Env.get('BULL_REDIS_HOST', 'localhost'),
       port: Env.get('BULL_REDIS_PORT'),
-      password: Env.get('BULL_REDIS_PASSWORD'),
-    },
-  },
+      password: Env.get('BULL_REDIS_PASSWORD')
+    }
+  }
 }
 
 export default bullConfig

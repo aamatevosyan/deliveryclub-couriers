@@ -151,7 +151,7 @@ Encore.configureDevServerOptions((options) => {
   options.liveReload = true
   options.static.push({
     directory: join(__dirname, './resources/views'),
-    watch: true,
+    watch: true
   })
 })
 
@@ -192,7 +192,7 @@ Encore.configureDevServerOptions((options) => {
 Encore.enableVueLoader(() => {}, {
   version: 3,
   runtimeCompilerBuild: false,
-  useJsx: false,
+  useJsx: false
 })
 
 /*
@@ -207,7 +207,7 @@ Encore.enableVueLoader(() => {}, {
 */
 const config = Encore.getWebpackConfig()
 config.infrastructureLogging = {
-  level: 'warn',
+  level: 'warn'
 }
 config.stats = 'errors-warnings'
 

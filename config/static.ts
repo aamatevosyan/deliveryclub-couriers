@@ -83,7 +83,7 @@ const staticConfig: AssetsConfig = {
   | contents change.
   |
   */
-  immutable: false,
+  immutable: false
 }
 
 export default staticConfig
