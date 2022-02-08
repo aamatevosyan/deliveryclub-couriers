@@ -12,7 +12,8 @@
   "rules": {
     "prettier/prettier": [
       "error"
-    ]
+    ],
+    "vue/multi-word-component-names": 0
   },
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
