@@ -70,7 +70,7 @@ export default class AuthPhoneCodeController {
 
   public async destroy({ request, response }: HttpContextContract) {
     const uuid = request.param('uuid')
-    User = await getUser(uuid)
+    await getUser(uuid)
 
     const payload = await request.validate(ConfirmPhoneCodeValidator)
     const cacheKey = `auth.sendcode.phone.${uuid}`

@@ -13,6 +13,12 @@ export default class User extends BaseModel {
   public uuid: string
 
   @column()
+  public firstName: string
+
+  @column()
+  public lastName: string
+
+  @column()
   public email: string
 
   @column()
