@@ -1,9 +1,9 @@
-import '../css/app.css'
-
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 import { initRoutes } from '@eidellev/adonis-stardust'
+
+import '../css/app.css'
 
 initRoutes()
 
