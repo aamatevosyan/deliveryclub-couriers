@@ -26,6 +26,11 @@ export default class RegisterFinalizeValidator {
   public schema = schema.create({
     firstName: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(80)]),
     lastName: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(80)]),
+    password: schema.string({}, [
+      rules.required(),
+      rules.minLength(8),
+      rules.confirmed('passwordConfirmation'),
+    ]),
   })
 
   /**
