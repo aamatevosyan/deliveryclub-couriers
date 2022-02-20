@@ -1773,6 +1773,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@headlessui/vue@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@headlessui/vue@npm:1.5.0"
+  peerDependencies:
+    vue: ^3.2.0
+  checksum: 0aab7484326ae4a4bea379618ad08a8b03408edf8d48500bfcf6cad433dd29735687073ba3518be6a37da3c84fdee049fc3f68bf9e6870d67bb2ed508a93f548
+  languageName: node
+  linkType: hard
+
+"@heroicons/vue@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@heroicons/vue@npm:1.0.5"
+  peerDependencies:
+    vue: ">= 3"
+  checksum: 510e50702591355493067e31ea8a119e4ca79a1652ff75b9e68fc489cc342123e18c251c3104b62c9daedd12862592af2d94d91dec34d52ef4f4a4043f1f3665
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.9.2":
   version: 0.9.3
   resolution: "@humanwhocodes/config-array@npm:0.9.3"
@@ -5440,6 +5458,8 @@ __metadata:
     "@adonisjs/view": ^6.1.0
     "@eidellev/adonis-stardust": ^2.2.0
     "@eidellev/inertia-adonisjs": ^6.0.1
+    "@headlessui/vue": 1.5.0
+    "@heroicons/vue": ^1.0.5
     "@inertiajs/inertia": ^0.11.0
     "@inertiajs/inertia-vue3": ^0.6.0
     "@inertiajs/progress": ^0.2.7

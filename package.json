@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.3.0",
+    "@headlessui/vue": "1.5.0",
+    "@heroicons/vue": "^1.0.5",
     "@inertiajs/progress": "^0.2.7",
     "@symfony/webpack-encore": "^1.7.0",
     "@types/proxy-addr": "^2.0.0",

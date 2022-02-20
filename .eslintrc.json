@@ -13,7 +13,14 @@
     "prettier/prettier": [
       "error"
     ],
-    "vue/multi-word-component-names": 0
+    "vue/multi-word-component-names": 0,
+    "vue/html-closing-bracket-newline": [
+      "error",
+      {
+        "singleline": "never",
+        "multiline": "always"
+      }
+    ]
   },
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
