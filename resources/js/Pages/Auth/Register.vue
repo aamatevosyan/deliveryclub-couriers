@@ -17,16 +17,15 @@
       </div>
       <form
         class="mt-8 space-y-6"
-        method="POST"
-        :action="regRoute"
+        @submit.prevent="submit()"
       >
         <div>
           <div>
-            <RegInput
+            <input
+              v-model="form.email"
               type="email"
               placeholder="aboba@example.com"
-              label="Введите почту"
-            />
+            >
             <button
               type="submit"
               class="mt-5 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600"
@@ -46,15 +45,18 @@ import RegInput from '../Components/RegInput'
 
 export default {
   name: 'Register',
-  components: {
-    RegInput,
+  data() {
+    return {
+      form: this.$inertia.form({
+        email: '',
+      }),
+      authRoute: stardust.route('auth.login.show'),
+      regRoute: stardust.route('auth.register.store'),
+    }
   },
-  computed: {
-    authRoute() {
-      return stardust.route('auth.login.show')
-    },
-    regRoute() {
-      return stardust.route('auth.register.store')
+  methods: {
+    submit() {
+      this.form.post(this.regRoute)
     },
   },
 }
